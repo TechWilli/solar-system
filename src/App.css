@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  font-family: "Roboto", -apple-system, system-ui, sans-serif;
+}
+
+html {
+  min-height: 100%;
+	font-size: 16px;
+}
+
+*,
+button,
+input {
+  border: 0;
+  background: none;
+  font-family: "Roboto", -apple-system, system-ui, sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: .8rem;
+  height: .8rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(220, 220, 220);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: .35rem;
+  background-color: grey;
+  border: 3px solid rgb(220, 220, 220);
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 43%, rgba(68,0,138,1) 100%);
+}
