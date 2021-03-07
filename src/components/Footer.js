@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const FooterContainer = styled.footer`
@@ -36,7 +35,7 @@ const Footer = () => {
 
   return (
     <FooterContainer>
-      <span>Diretamente da Via Láctea feito por <LinkToGithub href='https://github.com/TechWilli'>William Araujo</LinkToGithub></span>
+      <span>Diretamente da Via Láctea feito por <LinkToGithub href='https://github.com/TechWilli' target="_blank">William Araujo</LinkToGithub></span>
     </FooterContainer>
   )
 }

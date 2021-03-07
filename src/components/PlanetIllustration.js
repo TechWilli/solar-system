@@ -2,17 +2,16 @@ import React from 'react'
 import styled from 'styled-components'
 
 const PlanetStyled = styled.img`
-  width: ${props => props.width && props.width}rem;
-  height: 10em;
+  width: 100%;
+  height: 100%;
 `
 
-const PlanetIllustration = ({ src, alt, width }) => {
+const PlanetIllustration = ({ src, alt}) => {
 
   return (
     <PlanetStyled
       src={src}
       alt={alt}
-      width={width}
     />
   )
 }

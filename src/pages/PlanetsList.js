@@ -38,7 +38,12 @@ const LinkToDetails = styled(Link)`
   color: #333333;
 `
 
-const ListPlanets = () => {
+const SvgWrapper = styled.div`
+  width: ${props => props.width && props.width}rem;
+  height: ${props => props.height && props.height}rem;
+`
+
+const PlanetsList = () => {
 
   const [planetsData, setPlanetsData] = useState([])
   const data = useFetchPlanets('planets')
@@ -62,13 +67,17 @@ const ListPlanets = () => {
               >
                 <Suspense fallback={<SkeletonTheme color="#dbdbdb" highlightColor="#ededed"><Skeleton width={320} height={287} /></SkeletonTheme>}>
                   <PlanetCard>
-                    <Suspense fallback={<SkeletonTheme color="#dbdbdb" highlightColor="#ededed"><Skeleton circle={true} width="10rem" height="10rem" /></SkeletonTheme>}>
-                      <PlanetIllustration
-                        src={planet.image}
-                        alt="planet svg illustration"
-                        width={planet.name === 'Saturno' ? 15 : 10}
-                      />
-                    </Suspense>
+                    <SvgWrapper
+                      width={planet.name === 'Saturno' ? 15 : 10}
+                      height={10}
+                    >
+                      <Suspense fallback={<SkeletonTheme color="#dbdbdb" highlightColor="#ededed"><Skeleton circle={true} width="10rem" height="10rem" /></SkeletonTheme>}>
+                        <PlanetIllustration
+                          src={planet.image}
+                          alt="planet svg illustration"
+                        />
+                      </Suspense>
+                    </SvgWrapper>
                     <PlanetTitle>{planet.name}</PlanetTitle>
                   </PlanetCard>
                 </Suspense>
@@ -81,4 +90,4 @@ const ListPlanets = () => {
   )
 }
 
-export default ListPlanets
+export default PlanetsList

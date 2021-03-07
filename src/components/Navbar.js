@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
+import { Link, useLocation } from 'react-router-dom'
 
 const NavbarContainer = styled.nav`
   width: 100%;
@@ -9,6 +10,7 @@ const NavbarContainer = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 
   h1 {
     color: white;
@@ -16,10 +18,35 @@ const NavbarContainer = styled.nav`
   }
 `
 
+const GoBackArrow = styled.div`
+  width: 1.2rem;
+  height: 1.2rem;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 30px;
+  left: 30px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`
+
 const Navbar = () => {
+
+  const location = useLocation()
+
+  useEffect(() => {
+    console.log('location', location)
+
+  }, [location])
 
   return (
     <NavbarContainer>
+      {location.pathname !== '/' && <Link to='/'>
+        <GoBackArrow />
+      </Link>}
       <h1>Sistema Solar</h1>
     </NavbarContainer>
   )
