@@ -38,5 +38,8 @@ input {
   width: 100vw;
   height: 100vh;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 43%, rgba(68,0,138,1) 100%);
 }

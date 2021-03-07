@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Suspense, lazy } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import PlanetCard from '../components/PlanetCard'
+// import PlanetCard from '../components/PlanetCard'
 import PlanetTitle from '../components/PlanetTitle'
 import useFetchPlanets from '../hooks/useFetchPlanets'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+
+const PlanetIllustration = lazy(() => import('../components/PlanetIllustration'))
+const PlanetCard = lazy(() => import('../components/PlanetCard'))
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 2rem;
-  margin: 3rem auto 0;
+  margin: 3rem auto;
   max-width: 90vw;
 
   @media (max-width: 1800px) {
@@ -21,25 +25,12 @@ const Container = styled.div`
   }
 
   @media (max-width: 805px) {
-    display: block;
+    grid-template-columns: 1fr;
   }
 `
 
-const PlanetSvg = styled.img`
-  width: ${props => props.width && props.width}rem;
-  height: 10em;
-`
+const Wrapper = styled.div`
 
-const TitleContainer = styled.div`
-  width: 100%;
-  background-color: rgb(255, 255, 255, 0.2);
-  text-align: center;
-  padding: 2.5rem 1rem;
-
-  h1 {
-    color: white;
-  text-transform: uppercase;
-  }
 `
 
 const LinkToDetails = styled(Link)`
@@ -60,10 +51,7 @@ const ListPlanets = () => {
   }, [planetsData, data])
 
   return (
-    <>
-      <TitleContainer>
-        <h1>Sistema Solar</h1>
-      </TitleContainer>
+    <Wrapper>
       <Container>
         {
           planetsData && planetsData.map((planet, index) => {
@@ -72,20 +60,24 @@ const ListPlanets = () => {
                 to={`planets/${planet.id}`}
                 key={index}
               >
-                <PlanetCard>
-                  <PlanetSvg
-                    src={planet.image}
-                    alt="planet svg illustration"
-                    width={planet.name === 'Saturno' ? 15 : 10}
-                  />
-                  <PlanetTitle>{/* {!!Number(planet.id) && `${planet.id}º - `} */}{planet.name}</PlanetTitle>
-                </PlanetCard>
+                <Suspense fallback={<SkeletonTheme color="#dbdbdb" highlightColor="#ededed"><Skeleton width={320} height={287} /></SkeletonTheme>}>
+                  <PlanetCard>
+                    <Suspense fallback={<SkeletonTheme color="#dbdbdb" highlightColor="#ededed"><Skeleton circle={true} width="10rem" height="10rem" /></SkeletonTheme>}>
+                      <PlanetIllustration
+                        src={planet.image}
+                        alt="planet svg illustration"
+                        width={planet.name === 'Saturno' ? 15 : 10}
+                      />
+                    </Suspense>
+                    <PlanetTitle>{planet.name}</PlanetTitle>
+                  </PlanetCard>
+                </Suspense>
               </LinkToDetails>
             )
           })
         }
       </Container>
-    </>
+    </Wrapper>
   )
 }
 

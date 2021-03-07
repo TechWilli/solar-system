@@ -10,7 +10,6 @@ const Card = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 2rem auto 2em;
   padding: 1.5rem;
   position: relative;
   transition: 200ms;
