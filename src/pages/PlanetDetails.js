@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Suspense, lazy } from 'react'
 import styled from 'styled-components'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation, Link } from 'react-router-dom'
 import useFetchPlanets from '../hooks/useFetchPlanets'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
@@ -22,6 +22,7 @@ const InfoContainer = styled.div`
   width: 70%;
   height: auto;
   margin: 2rem 0;
+  position: relative;
 
   @media (max-width: 1600px) {
     width: 95%;
@@ -108,9 +109,60 @@ const SvgWrapper = styled.div`
   }
 `
 
+const GoBackArrow = styled.div`
+  width: 2.2rem;
+  height: 2.2rem;
+  border-left: 3px solid white;
+  border-bottom: 3px solid white;
+  transform: rotate(45deg);
+  margin-right: 1rem;
+  position: absolute;
+  left: -40px;
+  top: 245px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @media (max-width: 1600px) {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-left: 3px solid black;
+    border-bottom: 3px solid black;
+    left: 20px;
+    top: 45px;
+  }
+`
+
+const GoForwardArrow = styled.div`
+  width: 2.2rem;
+  height: 2.2rem;
+  border-right: 3px solid white;
+  border-top: 3px solid white;
+  transform: rotate(45deg);
+  margin-left: 1rem;
+  position: absolute;
+  right: -40px;
+  top: 245px;
+  
+  &:hover {
+    cursor: pointer;
+  }
+
+  @media (max-width: 1600px) {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-right: 3px solid black;
+    border-top: 3px solid black;
+    right: 20px;
+    top: 45px;
+  }
+`
+
 const PlanetDetail = () => {
 
   const routeParams = useParams()
+  const location = useLocation()
   const data = useFetchPlanets(`planet/${routeParams.id}`)
   const [planetInfo, setPlanetInfo] = useState({})
 
@@ -123,6 +175,9 @@ const PlanetDetail = () => {
   return (
     <Wrapper>
       <InfoContainer>
+        {location.pathname !== '/planets/0' && <Link to={`/planets/${Number(routeParams.id) - 1}`}>
+          <GoBackArrow />
+        </Link>}
         <div style={{ textAlign: 'center' }}>
           <Title>{planetInfo.name}</Title>
         </div>
@@ -158,6 +213,9 @@ const PlanetDetail = () => {
             </div>
           </PlanetInfo>
         </FlexContainer>
+        {location.pathname !== '/planets/9' && <Link to={`/planets/${Number(routeParams.id) + 1}`}>
+          <GoForwardArrow />
+        </Link>}
       </InfoContainer>
     </Wrapper>
   )
