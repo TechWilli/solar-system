@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link, useLocation } from 'react-router-dom'
 
@@ -39,7 +39,7 @@ const GoBackArrow = styled.div`
   }
 `
 
-const Navbar = () => {
+const Navbar = memo(() => {
 
   const location = useLocation()
 
@@ -56,6 +56,6 @@ const Navbar = () => {
       <h1>Sistema Solar</h1>
     </NavbarContainer>
   )
-}
+})
 
 export default Navbar

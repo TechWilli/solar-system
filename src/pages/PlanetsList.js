@@ -1,7 +1,6 @@
 import React, { useEffect, useState, Suspense, lazy } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-// import PlanetCard from '../components/PlanetCard'
 import PlanetTitle from '../components/PlanetTitle'
 import useFetchPlanets from '../hooks/useFetchPlanets'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import styled from 'styled-components'
 
 const FooterContainer = styled.footer`
@@ -31,13 +31,13 @@ const LinkToGithub = styled.a`
   }
 `
 
-const Footer = () => {
+const Footer = memo(() => {
 
   return (
     <FooterContainer>
       <span>Diretamente da Via Láctea feito por <LinkToGithub href='https://github.com/TechWilli' target="_blank">William Araujo</LinkToGithub></span>
     </FooterContainer>
   )
-}
+})
 
 export default Footer
